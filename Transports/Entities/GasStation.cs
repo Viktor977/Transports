@@ -20,8 +20,6 @@ namespace Transports.Entities
             {
                 transport.Refuel();
             }
-
-           
         }
     }
 }

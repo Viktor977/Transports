@@ -7,18 +7,22 @@ using Transports.Interfaces;
 
 namespace Transports.Entities
 {
-    public class Horse :Transport, IMoveable
+    public class Horse :Transport
     {
         private string _nickname;
         private string _breed;
+        public new FuelType Fuel = FuelType.Feed;
         
         public Horse(string name,string brand):base(name, brand)
         {
             _nickname = name;
             _breed = brand;
         }
-
-        public void Move()
+        public override void Refuel()
+        {
+            Console.WriteLine("There is no food!");
+        }
+        public override void Move()
         {
             Console.WriteLine("Riding horse...");
         }

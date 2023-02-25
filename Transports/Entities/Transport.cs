@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Transports.Interfaces;
 
 namespace Transports.Entities
 {
-    public abstract class Transport
+    public abstract class Transport : IMoveable
     {
         private string _model;
         private string _brand;
@@ -52,22 +53,21 @@ namespace Transports.Entities
                 _model = model;
             }
         }
+        public abstract void Refuel();
 
-        public virtual void Refuel()
-        {
-            if(CurrentFuelCapacity==MaxFuelCapacity)
-            {
-                Console.WriteLine("The tank is already full");
-            }
-            else
-            {
-                double fuelToAdd = MaxFuelCapacity - CurrentFuelCapacity;
-                Console.WriteLine($"Adding {fuelToAdd} liters of {Fuel} fuel to car :{_brand} {_model}");
-                CurrentFuelCapacity = MaxFuelCapacity;
-            }
-        }
+       
         public virtual string GetModel() => _model;
         public virtual string GetBrand() => _brand;
 
+        public virtual void Move()
+        {
+            if (CurrentFuelCapacity == 0)
+            {
+                Console.WriteLine("Not enough fuel");
+            }
+
+            CurrentFuelCapacity -= FuelConsumption;
+            Console.WriteLine($"Fuel:{Fuel} used {CurrentFuelCapacity}");
+        }
     }
 }

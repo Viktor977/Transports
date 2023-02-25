@@ -7,12 +7,21 @@ using Transports.Interfaces;
 
 namespace Transports.Entities
 {
-    public class Moto : Transport, IMoveable
+    public class Moto : Transport
     {
         public Moto(string brand,string model):base(brand, model) { }
-        public void Move()
+        public override void Refuel()
         {
-            throw new NotImplementedException();
+            if (CurrentFuelCapacity == MaxFuelCapacity)
+            {
+                Console.WriteLine("The tank is already full");
+            }
+            else
+            {
+                double fuelToAdd = MaxFuelCapacity - CurrentFuelCapacity;
+                Console.WriteLine($"Adding {fuelToAdd} liters of {Fuel} fuel to moto :{GetBrand()} {GetModel()}");
+                CurrentFuelCapacity = MaxFuelCapacity;
+            }
         }
     }
 }

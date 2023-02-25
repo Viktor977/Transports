@@ -7,25 +7,23 @@ using Transports.Interfaces;
 
 namespace Transports.Entities
 {
-    public class Car : Transport, IMoveable
+    public class Car : Transport
     {
         public Car(string brand, string model) : base(brand, model)
         {
         }
-       
-        public void Move()
+        public override void Refuel()
         {
-            if (CurrentFuelCapacity == 0)
+            if (CurrentFuelCapacity == MaxFuelCapacity)
             {
-                Console.WriteLine("Not enough fuel");
+                Console.WriteLine("The tank is already full");
             }
-           
-            CurrentFuelCapacity -= FuelConsumption;
-            Console.WriteLine($"Fuel:{Fuel} used {CurrentFuelCapacity}");
-        }
-        public override string GetModel()
-        {
-            return "this car is " + base.GetModel();
-        }
+            else
+            {
+                double fuelToAdd = MaxFuelCapacity - CurrentFuelCapacity;
+                Console.WriteLine($"Adding {fuelToAdd} liters of {Fuel} fuel to car :{GetBrand()} {GetModel()}");
+                CurrentFuelCapacity = MaxFuelCapacity;
+            }
+        }     
     }
 }
