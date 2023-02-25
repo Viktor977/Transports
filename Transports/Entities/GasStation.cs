@@ -16,6 +16,10 @@ namespace Transports.Entities
                 Console.WriteLine("There is no food!");
                 return;
             }
+            else
+            {
+                transport.Refuel();
+            }
 
            
         }

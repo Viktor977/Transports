@@ -38,6 +38,7 @@ namespace Transports.Entities
                 _wheels = value;
             }
         }
+        
         public Transport(string brand, string model)
         {
             if (string.IsNullOrWhiteSpace(brand) || string.IsNullOrWhiteSpace(model))
@@ -61,7 +62,7 @@ namespace Transports.Entities
             else
             {
                 double fuelToAdd = MaxFuelCapacity - CurrentFuelCapacity;
-                Console.WriteLine($"Adding {fuelToAdd} liters of {Fuel} fuel to car");
+                Console.WriteLine($"Adding {fuelToAdd} liters of {Fuel} fuel to car :{_brand} {_model}");
                 CurrentFuelCapacity = MaxFuelCapacity;
             }
         }

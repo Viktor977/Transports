@@ -1,19 +1,33 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Transports.Entities;
+﻿using Transports.Entities;
 
-Console.WriteLine("Hello, World!");
-Car car = new Car("", null);
-Console.WriteLine(car.GetBrand());
-Console.WriteLine(car.GetModel());
-car.MaxFuelCapacity = 10;
-car.CurrentFuelCapacity= 10;
-try
+List<Transport> transports = Seed();
+GasStation owg=new GasStation(); ;
+foreach (var transport in transports)
 {
-    car.Wheels = 0;
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
+    if (transport == null)
+    {
+        Console.WriteLine("no transport");
+        return;
+    }
+    owg.Refuel(transport);
+    
 }
 
-car.Refuel();
+
+static List<Transport> Seed()
+{
+    var transports = new List<Transport>();
+
+    Car car = new Car("BMW", "M240i");
+    car.Wheels = 4;
+    car.Fuel = FuelType.Gasoline;
+    car.FuelConsumption = 8.0;
+    car.MaxFuelCapacity = 52.0;
+
+
+    Horse horse = new Horse("Rosinante", "");
+
+    transports.Add(car);
+    transports.Add(horse);
+    return transports;
+}

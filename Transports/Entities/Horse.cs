@@ -7,10 +7,16 @@ using Transports.Interfaces;
 
 namespace Transports.Entities
 {
-    public class Horse : IMoveable
+    public class Horse :Transport, IMoveable
     {
-        string _nickname;
-        public Horse(string name) => _nickname = name;
+        private string _nickname;
+        private string _breed;
+        
+        public Horse(string name,string brand):base(name, brand)
+        {
+            _nickname = name;
+            _breed = brand;
+        }
 
         public void Move()
         {

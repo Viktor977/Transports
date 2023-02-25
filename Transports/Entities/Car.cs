@@ -12,15 +12,20 @@ namespace Transports.Entities
         public Car(string brand, string model) : base(brand, model)
         {
         }
-
+       
         public void Move()
         {
             if (CurrentFuelCapacity == 0)
             {
-                Console.WriteLine("");
+                Console.WriteLine("Not enough fuel");
             }
+           
             CurrentFuelCapacity -= FuelConsumption;
+            Console.WriteLine($"Fuel:{Fuel} used {CurrentFuelCapacity}");
         }
-        
+        public override string GetModel()
+        {
+            return "this car is " + base.GetModel();
+        }
     }
 }
