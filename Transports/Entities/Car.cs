@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transports.Interfaces;
-
-namespace Transports.Entities
+﻿namespace Transports.Entities
 {
     public class Car : Transport
     {
-        public Car(string brand, string model) : base(brand, model)
-        {
-        }
+        public Car(string brand, string model) : base(brand, model) { }
+      
         public override void Refuel()
         {
             if (CurrentFuelCapacity == MaxFuelCapacity)

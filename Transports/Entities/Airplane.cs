@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transports.Interfaces;
-
-namespace Transports.Entities
+﻿namespace Transports.Entities
 {
     public class Airplane : Transport
     {

@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Transports.Interfaces;
 
 namespace Transports.Entities
 {
-    public class GasStation
-    {
-       
-        public void Refuel(Transport transport)
-        {
-            if (transport is Horse)
+    public static class GasStation
+    {   
+        public static void Refuel(List<IMoveable> transports)
+        {   
+            if (transports == null) throw new ArgumentNullException();
+            foreach (IMoveable moveable in transports)
             {
-                Console.WriteLine("There is no food!");
-                return;
-            }
-            else
-            {
-                transport.Refuel();
+                moveable.Refuel();
             }
         }
     }

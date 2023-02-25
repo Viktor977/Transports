@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transports.Interfaces;
+﻿using Transports.Interfaces;
 
 namespace Transports.Entities
 {
@@ -12,23 +7,25 @@ namespace Transports.Entities
         private string _model;
         private string _brand;
         private double _maxFuelCapacity;
-        private int _wheels;
-        public double MaxFuelCapacity {
+        private int _wheels;  
+        public FuelType Fuel { get; set; }
+        public double CurrentFuelCapacity { get; set; }
+        public double FuelConsumption { get; set; }
+        public double MaxFuelCapacity
+        {
             get => _maxFuelCapacity;
-            
+
             set
             {
-                if(value < 0)_maxFuelCapacity = 0;
+                if (value < 0) _maxFuelCapacity = 0;
                 _maxFuelCapacity = value;
             }
         }
-        public FuelType Fuel { get; set; }
-        public double CurrentFuelCapacity { get; set; }
-        public double FuelConsumption { get; set;}
+      
         public int Wheels
         {
             get => _wheels;
-           
+
             set
             {
                 if (value <= 0)
@@ -39,7 +36,7 @@ namespace Transports.Entities
                 _wheels = value;
             }
         }
-        
+
         public Transport(string brand, string model)
         {
             if (string.IsNullOrWhiteSpace(brand) || string.IsNullOrWhiteSpace(model))
@@ -54,20 +51,21 @@ namespace Transports.Entities
             }
         }
         public abstract void Refuel();
-
-       
         public virtual string GetModel() => _model;
         public virtual string GetBrand() => _brand;
-
         public virtual void Move()
         {
-            if (CurrentFuelCapacity == 0)
+            if (CurrentFuelCapacity <= 0)
             {
-                Console.WriteLine("Not enough fuel");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{_brand} {_model} Not enough fuel!!!");
+                Console.ResetColor();
             }
-
-            CurrentFuelCapacity -= FuelConsumption;
-            Console.WriteLine($"Fuel:{Fuel} used {CurrentFuelCapacity}");
+            else
+            {
+                CurrentFuelCapacity -= FuelConsumption;
+                Console.WriteLine($"Fuel:{Fuel} used {CurrentFuelCapacity}");
+            }
         }
     }
 }

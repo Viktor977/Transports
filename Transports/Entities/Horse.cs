@@ -1,30 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transports.Interfaces;
+﻿using Transports.Interfaces;
 
 namespace Transports.Entities
 {
-    public class Horse :Transport
+    public class Horse : IMoveable
     {
-        private string _nickname;
-        private string _breed;
-        public new FuelType Fuel = FuelType.Feed;
+        private string _nickname;  
         
-        public Horse(string name,string brand):base(name, brand)
+        public FuelType Fuel = FuelType.Feed;
+        
+        public Horse(string name)
         {
-            _nickname = name;
-            _breed = brand;
+            _nickname = name;         
         }
-        public override void Refuel()
+        public  void Refuel()
         {
             Console.WriteLine("There is no food!");
         }
-        public override void Move()
+        public  void Move()
         {
-            Console.WriteLine("Riding horse...");
-        }
+            Console.WriteLine($"Riding horse {_nickname}...");
+        }      
     }
 }

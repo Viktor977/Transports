@@ -1,30 +1,28 @@
 ﻿using Transports.Entities;
+using Transports.Interfaces;
 
-List<Transport> transports = Seed();
-GasStation owg=new GasStation(); ;
-foreach (var transport in transports)
+List<IMoveable> transports = Seed();
+
+GasStation.Refuel(transports);
+Move(transports);
+Move(transports);
+Move(transports);
+Move(transports);
+GasStation.Refuel(transports);
+
+ void Move(List<IMoveable> transports)
 {
-    if (transport == null)
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("Transport moved");
+    Console.ResetColor();
+    foreach (var transport in transports)
     {
-        Console.WriteLine("no transport");
-        return;
+        transport.Move();
     }
-    owg.Refuel(transport);    
 }
-
-foreach (var transport in transports)
+static List<IMoveable> Seed()
 {
-    transport.Move();
-}
-foreach (var transport in transports)
-{
-    transport.Move();
-}
-
-
-static List<Transport> Seed()
-{
-    var transports = new List<Transport>();
+    var transports = new List<IMoveable>();
 
     Car car = new Car("BMW", "M240i");
     car.Wheels = 4;
@@ -41,11 +39,11 @@ static List<Transport> Seed()
     Airplane airplane = new Airplane("Boeing", "747");
     airplane.Wheels = 3;
     airplane.Fuel = FuelType.JetFuel;
-    airplane.CurrentFuelCapacity = 5000;
-    airplane.MaxFuelCapacity = 10_000;
+    airplane.FuelConsumption = 5_000d;
+    airplane.MaxFuelCapacity = 10_000d;
 
 
-    Horse horse = new Horse("Rosinante", "");
+    Horse horse = new Horse("Rosinante");
 
     transports.Add(car);
     transports.Add(moto);

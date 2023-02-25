@@ -9,5 +9,6 @@ namespace Transports.Interfaces
     public interface IMoveable
     {
         void Move();
+        void Refuel();
     }
 }
